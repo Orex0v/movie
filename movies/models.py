@@ -109,8 +109,8 @@ class RatingStar(models.Model):
 
 
     class Meta:
-        verbose_name = "Кадр из фильма"
-        verbose_name_plural = "Кадры из фильма"
+        verbose_name = "Звезда рейтинга"
+        verbose_name_plural = "Звезды рейтинга"
 
 
 class Rating(models.Model):
@@ -135,12 +135,12 @@ class Reviews(models.Model):
     name = models.CharField("Имя", max_length=100)
     text = models.TextField("Сообщение", max_length=5000)
     parent = models.ForeignKey(
-        "self", verbose_name="Родитель",  on_delete=models.CASCADE
-        )
+        'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True
+    )
     movie = models.ForeignKey(Movie, verbose_name="фильм", on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"{self.star} = {self.movie}"
+        return f"{self.name} - {self.movie}"
 
 
     class Meta:
