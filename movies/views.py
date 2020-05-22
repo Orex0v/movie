@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
-from .models import Movie, Category, Actor, Genre
+from .models import Movie, Category, Actor, Genre, Rating
 from .forms import ReviewForm, RatingForm
 
 
@@ -47,7 +47,7 @@ class AddStarRating(View):
     def post(self, request):
         form = RatingForm(request.POST)
         if form.is_valid():
-            Rating.objects.uptade_or_create(
+            Rating.objects.update_or_create(
                 ip=self.get_client_ip(request),
                 movie_id=int(request.POST.get("movie")),
                 defaults={"star_id": int(request.POST.get("star"))}

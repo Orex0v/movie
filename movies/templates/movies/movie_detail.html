@@ -71,7 +71,8 @@
                                 {% for k, v in star_form.fields.star.choices %}
                                     <input id="rating{{ v }}" type="radio" name="star"
                                            value="{{ k }}">
-                                    <label for="rating{{ v }}">{{ k }}</label>
+                                    <label for="rating{{ v }}">{{ k }} s</label>
+
                                 {% endfor %}
                             </span>
                             <span class="editContent">4.0</span>
