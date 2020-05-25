@@ -91,7 +91,7 @@ class FilterMoviesView(GenreYear, ListView):
         return queryset
 
 
-        def get_context_data(self, *, object_list=None, **kwargs):
+        def get_context_data(self, *args, **kwargs):
             context = super().get_context_data(*args, **kwargs)
             context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist("year")])
             context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
@@ -110,3 +110,18 @@ class JsonFilterMoviesView(ListView):
     def get(self, request, *args, **kwargs):
         queryset = list(self.get_queryset())
         return JsonResponse({"movies": queryset}, safe=False)
+
+
+class Search(ListView):
+    """Поиск фильмов"""
+    paginate_by = 1
+
+    def get_queryset(self):
+        return Movie.objects.filter(title__icontains=self.request.GET.get("q"))
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["q"] = self.request.GET.get("q")
+        return context
+
