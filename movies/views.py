@@ -22,6 +22,15 @@ class MoviesView(GenreYear, ListView):
     queryset = Movie.objects.filter(draft=False)
     paginate_by = 1
 
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["star_form"] = RatingForm()
+        context["form"] = ReviewForm()
+        return context
+
+
+
+
 class MoviesDetailView(GenreYear, DetailView):
     """Детали фильма"""
     model = Movie
