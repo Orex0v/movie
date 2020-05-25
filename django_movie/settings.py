@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
     'snowpenguin.django.recaptcha3',
     'ckeditor',
     'ckeditor_uploader',
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'django_movie.urls'
@@ -204,3 +207,5 @@ RECAPTCHA_PUBLIC_KEY = "6LeyH_wUAAAAAAiHHFfL0_5IiHBwyEWr4-adRHbx"
 RECAPTCHA_PRIVATE_KEY = "6LeyH_wUAAAAACySwN4MFGkJNNwfMH4BUf8o77Dz"
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
+
+SITE_ID = 1
