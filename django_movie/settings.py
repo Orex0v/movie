@@ -44,7 +44,12 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'movies',
-    'contact'
+    'contact',
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.vk",
+
 ]
 
 MIDDLEWARE = [
@@ -91,7 +96,18 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
+LOGIN_REDIRECT_URL = "/"
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+LOGIN_REDIRECT_URL = "/"
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
